@@ -77,6 +77,12 @@
  <Reference Include="Unity.Analytics.DataPrivacy">
  <HintPath>C:/Users/s172050/Documents/EmployProduct/就職作品/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
  </Reference>
+ <Reference Include="Cinemachine">
+ <HintPath>C:/Users/s172050/Documents/EmployProduct/就職作品/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
+ </Reference>
+ <Reference Include="com.unity.cinemachine.editor">
+ <HintPath>C:/Users/s172050/Documents/EmployProduct/就職作品/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Users/s172050/AppData/Local/Unity/Editor/2019.1.0f2/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
  </Reference>
