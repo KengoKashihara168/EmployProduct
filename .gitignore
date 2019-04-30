@@ -344,6 +344,7 @@ healthchecksdb
 
 # Backup folder for Package Reference Convert tool in Visual Studio 2017
 MigrationBackup/
+
 # This .gitignore file should be placed at the root of your Unity project directory
 
 /[Ll]ibrary/
@@ -400,4 +401,5 @@ sysinfo.txt
 
 # Crashlytics generated file
 crashlytics-build.properties
+
 
