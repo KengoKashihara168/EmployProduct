@@ -55,9 +55,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\GoalController.cs" />
      <Compile Include="Assets\PlayerMove.cs" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>C:/Users/s172050/Documents/EmployProduct/就職作品/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+ </Reference>
+ <Reference Include="Cinemachine">
+ <HintPath>C:/Users/s172050/Documents/EmployProduct/就職作品/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>C:/Users/s172050/Documents/EmployProduct/就職作品/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
@@ -71,17 +75,14 @@
  <Reference Include="Unity.CollabProxy.Editor">
  <HintPath>C:/Users/s172050/Documents/EmployProduct/就職作品/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
  </Reference>
+ <Reference Include="com.unity.cinemachine.editor">
+ <HintPath>C:/Users/s172050/Documents/EmployProduct/就職作品/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
+ </Reference>
  <Reference Include="Unity.TextMeshPro">
  <HintPath>C:/Users/s172050/Documents/EmployProduct/就職作品/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="Unity.Analytics.DataPrivacy">
  <HintPath>C:/Users/s172050/Documents/EmployProduct/就職作品/Library/ScriptAssemblies/Unity.Analytics.DataPrivacy.dll</HintPath>
- </Reference>
- <Reference Include="Cinemachine">
- <HintPath>C:/Users/s172050/Documents/EmployProduct/就職作品/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
- </Reference>
- <Reference Include="com.unity.cinemachine.editor">
- <HintPath>C:/Users/s172050/Documents/EmployProduct/就職作品/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Users/s172050/AppData/Local/Unity/Editor/2019.1.0f2/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
