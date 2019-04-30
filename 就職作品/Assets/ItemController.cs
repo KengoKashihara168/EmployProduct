@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GoalController : MonoBehaviour
+public class ItemController : MonoBehaviour
 {
+    int count;
     // Start is called before the first frame update
     void Start()
     {
-        
+        count = 1;
     }
 
     // Update is called once per frame
@@ -18,6 +19,10 @@ public class GoalController : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Goal");
+        if (other.tag != "Player") return;
+        if (count <= 0) return;
+        other.GetComponent<PlayerController>().LightPowerUp();
+        Destroy(gameObject);
+        count--;
     }
 }
