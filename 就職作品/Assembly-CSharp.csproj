@@ -62,9 +62,12 @@
      <Compile Include="Assets\PlayerMove.cs" />
  <Reference Include="Unity.Timeline.Editor">
  <HintPath>C:/Users/s172050/Documents/EmployProduct/就職作品/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+<<<<<<< HEAD
  </Reference>
  <Reference Include="Cinemachine">
  <HintPath>C:/Users/s172050/Documents/EmployProduct/就職作品/Library/ScriptAssemblies/Cinemachine.dll</HintPath>
+=======
+>>>>>>> b38e45d1a326daa07997fcff4ec7c5b32e0fff58
  </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>C:/Users/s172050/Documents/EmployProduct/就職作品/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
@@ -77,9 +80,12 @@
  </Reference>
  <Reference Include="Unity.CollabProxy.Editor">
  <HintPath>C:/Users/s172050/Documents/EmployProduct/就職作品/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+<<<<<<< HEAD
  </Reference>
  <Reference Include="com.unity.cinemachine.editor">
  <HintPath>C:/Users/s172050/Documents/EmployProduct/就職作品/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
+=======
+>>>>>>> b38e45d1a326daa07997fcff4ec7c5b32e0fff58
  </Reference>
  <Reference Include="Unity.TextMeshPro">
  <HintPath>C:/Users/s172050/Documents/EmployProduct/就職作品/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
