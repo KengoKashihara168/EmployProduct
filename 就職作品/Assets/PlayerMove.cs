@@ -13,7 +13,7 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
-        isJump = false;
+        isJump = false;        
     }
 
     // Update is called once per frame
@@ -56,7 +56,7 @@ public class PlayerMove : MonoBehaviour
         // ジャンプした
         isJump = true;
         return jump;
-    }
+    }    
 
     void OnTriggerEnter2D(Collider2D other)
     {  
