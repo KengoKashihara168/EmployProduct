@@ -5,10 +5,6 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     float limitTime;
-<<<<<<< HEAD
-=======
-    public Sprite sprite;
->>>>>>> eeea10468d7dab342c2864f296158833c193dd11
 
     // Start is called before the first frame update
     void Start()
