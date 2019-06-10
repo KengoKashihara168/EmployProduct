@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     {
         if(life.IsDie())
         {
-            Debug.Log("GameOver");
+            //Debug.Log("GameOver");
         }
     }
 
@@ -49,6 +49,7 @@ public class PlayerController : MonoBehaviour
         if(collision.gameObject.tag.Equals("Enemy"))
         {
             life.Damage();
+            GetComponent<PlayerMove>().HitEnemy(collision.transform.position);
         }
     }
 }
