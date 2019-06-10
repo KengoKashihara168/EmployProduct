@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    Rigidbody2D rigid;      // Rigidbody2D
-    public float speed;     // 移動速度
-    public float jumpForce; // ジャンプ力
-    bool isJump;            // ジャンプ中のフラグ
+    Rigidbody2D                      rigid;     // Rigidbody2D
+    [SerializeField] private float   speed;     // 移動速度
+    [SerializeField] private float   jumpForce; // ジャンプ力
+    private bool                     isJump;    // ジャンプ中のフラグ
 
     // Start is called before the first frame update
     void Start()

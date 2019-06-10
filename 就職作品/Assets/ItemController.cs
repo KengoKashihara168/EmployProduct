@@ -21,7 +21,7 @@ public class ItemController : MonoBehaviour
     {
         if (other.tag != "Player") return;
         if (count <= 0) return;
-        other.GetComponent<PlayerController>().LightPowerUp();
+        other.GetComponent<PlayerController>().HitItem(tag);
         Destroy(gameObject);
         count--;
     }
