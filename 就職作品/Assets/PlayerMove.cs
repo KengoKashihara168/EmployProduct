@@ -59,13 +59,18 @@ public class PlayerMove : MonoBehaviour
         // ジャンプした
         isJump = true;
         return jump;
-    } 
-    
-    public void HitEnemy(Vector3 otherPos)
+    }
+
+    /// <summary>
+    /// 敵に当たった処理
+    /// </summary>
+    /// <param name="enemyPos">敵の座標</param>
+    public void HitEnemy(Vector3 enemyPos)
     {
+        // ノックバックする処理
         moveFlag = false;
-        Vector2 direction = transform.position - otherPos;
-        float knockForce = 200.0f;
+        Vector2 direction = transform.position - enemyPos;
+        float knockForce = 300.0f;
         Vector2 force = direction.normalized * knockForce;
         StartCoroutine(KnockBack(force));
     }
@@ -74,8 +79,8 @@ public class PlayerMove : MonoBehaviour
     /// ノックバック
     /// </summary>
     private IEnumerator KnockBack(Vector3 force)
-    {      
-        for(int i = 0;i < 10.0f;i++)
+    {
+        for(int i = 0;i < PlayerController.KNOCK_BACK_TIME; i++)
         {
             rigid.AddForce(force);
             yield return null;
@@ -83,8 +88,8 @@ public class PlayerMove : MonoBehaviour
         moveFlag = true;
     }    
 
-    private void OnTriggerEnter2D(Collider2D other)
-    {  
+    public void Landing()
+    {
         isJump = false; // 着地した
     }
 }
