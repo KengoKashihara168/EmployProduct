@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     private float contactTime;
 
     public const int KNOCK_BACK_TIME = 10;
+    private const float DEFOULT_LIGHT_INTENSITY = 10.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -39,14 +40,28 @@ public class PlayerController : MonoBehaviour
         light.transform.position += new Vector3(0.0f, 0.0f, -0.5f);
     }
 
+    private void ChangeLightIntensity(float intensity)
+    {
+        light.intensity = intensity;
+    }
+
     private IEnumerator Blink()
     {
-        for(int i = 0;i < KNOCK_BACK_TIME;i++)
-        {
-            float alpha = Mathf.Sin(i);
-            Debug.Log(alpha);
-            yield return null;
-        }        
+        renderer.material.color = ChangeAlpha(0.0f);
+        ChangeLightIntensity(1.0f);
+
+        float invisibleTime = 0.2f;
+        yield return new WaitForSeconds(invisibleTime);        
+
+        renderer.material.color = ChangeAlpha(1.0f);
+        ChangeLightIntensity(DEFOULT_LIGHT_INTENSITY);
+    }
+
+    Color ChangeAlpha(float alpha)
+    {
+        Color color = renderer.material.color;
+        color.a = alpha;
+        return color;
     }
 
     private bool CheckFrameTime()
