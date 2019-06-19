@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     private PlayerMove move;
     private Life life;
     private float contactTime;
+    private BallController ball;
 
     public const int KNOCK_BACK_TIME = 10;
     private const float DEFOULT_LIGHT_INTENSITY = 10.0f;
@@ -27,6 +28,12 @@ public class PlayerController : MonoBehaviour
         if(life.IsDie())
         {
             //Debug.Log("GameOver");
+        }
+
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            ball.Thrown((int)move.GetDirection());
+            //Debug.Log(move.GetDirection());
         }
     }
 
@@ -97,11 +104,19 @@ public class PlayerController : MonoBehaviour
     /// <param name="collision">衝突したコリジョン</param>
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        string collisionTag = collision.gameObject.tag;
+
         // フレーム時間のチェック
         if (CheckFrameTime()) return;
 
+        // ボール
+        if(collisionTag.Equals("Ball"))
+        {            
+            ball = collision.gameObject.GetComponent<BallController>();                       
+        }
+
         // 敵
-        if (collision.gameObject.tag.Equals("Enemy"))
+        if (collisionTag.Equals("Enemy"))
         {
             // ダメージを食らう
             life.Damage();
@@ -109,7 +124,6 @@ public class PlayerController : MonoBehaviour
             move.HitEnemy(collision.transform.position);
             // 点滅
             StartCoroutine(Blink());
-
         }
     }
 }

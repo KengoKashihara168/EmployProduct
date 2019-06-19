@@ -2,6 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum Direction
+{
+    Left = -1,
+    Right = 1,
+}
+
 public class PlayerMove : MonoBehaviour
 {
     Rigidbody2D                      rigid;     // Rigidbody2D
@@ -9,25 +16,45 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float   jumpForce; // ジャンプ力
     private bool                     moveFlag;  // 移動可能フラグ
     private bool                     isJump;    // ジャンプ中のフラグ
+    private Direction                direction; // 向き
 
     // Start is called before the first frame update
     void Start()
     {
         rigid = GetComponent<Rigidbody2D>();
         moveFlag = true;
-        isJump = false;        
+        isJump = false;
+        direction = Direction.Left;
     }
 
     // Update is called once per frame
     void Update()
     {
-        // 移動
+        // 移動        
         rigid.velocity = Move();
 
         // ジャンプ
-        if(Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             rigid.velocity = Jump();
+        }
+    }
+
+    /// <summary>
+    /// プレイヤーの向きを設定
+    /// </summary>
+    /// <param name="direct">移動方向</param>
+    private void TurnAround(float movement)
+    {
+        if(movement > 0)
+        {
+            // 右向き
+            direction = Direction.Right;
+        }
+        else if(movement < 0)
+        {
+            // 左向き
+            direction = Direction.Left;
         }
     }
 
@@ -38,12 +65,16 @@ public class PlayerMove : MonoBehaviour
     {
         if (!moveFlag) return Vector2.zero;
         // 「←」か「A」が押されたら"-1"「→」か「D」が押されたら"1"になる
-        Vector2 move = new Vector2(Input.GetAxis("Horizontal"), rigid.velocity.y);
+        float moveX = Input.GetAxis("Horizontal");
         // 移動速度をかける
-        move.x *= speed;
+        moveX *= speed;
+        Vector2 move = new Vector2(moveX, rigid.velocity.y);
 
         // もしジャンプ中なら横移動速度を半減する
         if (isJump) move.x *= 0.5f;
+
+        // 向きを設定する
+        TurnAround(moveX);
 
         return move;
     }
@@ -91,5 +122,10 @@ public class PlayerMove : MonoBehaviour
     public void Landing()
     {
         isJump = false; // 着地した
+    }
+
+    public Direction GetDirection()
+    {
+        return direction;
     }
 }
