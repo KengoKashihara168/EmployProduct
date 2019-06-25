@@ -11,12 +11,16 @@ public class BallState : MonoBehaviour
     protected Rigidbody2D rigid;
     protected new CircleCollider2D collider;
 
+    private void Awake()
+    {
+        state = GetComponent<BallState>();
+        rigid = GetComponent<Rigidbody2D>();
+        collider = GetComponent<CircleCollider2D>();
+    }
 
     private void Start()
     {
-        state = new Moved();
-        rigid = GetComponent<Rigidbody2D>();
-        collider = GetComponent<CircleCollider2D>();
+        state = GetComponent<Moved>();
     }
 
     protected virtual void OnCollision(GameObject obj) {}
@@ -35,12 +39,12 @@ public class Stopped : BallState
         if(obj.tag.Equals("Player"))
         {
             // 拾われた
-            state = new PickedUp(obj);
+            state = GetComponent<Stopped>();
             return;
         }
 
         // 動いている
-        state = new Moved();
+        state = GetComponent<Moved>();
     }
 }
 
@@ -51,11 +55,11 @@ public class PickedUp : BallState
     /// コンストラクタ
     /// </summary>
     /// <param name="parent">親オブジェクト</param>
-    public PickedUp(GameObject parent)
-    {
-        Debug.Assert(parent.tag.Equals("Player"));
-        transform.parent = parent.transform;
-    }
+    //public PickedUp(GameObject parent)
+    //{
+    //    Debug.Assert(parent.tag.Equals("Player"));
+    //    transform.parent = parent.transform;
+    //}
 
     private void Start()
     {
@@ -67,8 +71,14 @@ public class PickedUp : BallState
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) state = new Thrown();
+        if (Input.GetKeyDown(KeyCode.Space)) state = GetComponent<Thrown>();
     }
+
+    //protected void SetParent(GameObject parent)
+    //{
+    //    Debug.Assert(parent.tag.Equals("Player"));
+    //    transform.parent = parent.transform;
+    //}
 
 
 }
@@ -99,7 +109,7 @@ public class Thrown : BallState
             // 敵にダメージを与える
         }
 
-        state = new Moved();
+        state = GetComponent<Moved>();
     }
 }
 
@@ -110,12 +120,18 @@ public class Moved : BallState
     protected override void OnCollision(GameObject obj)
     {
         // 拾われた
-        if (obj.tag.Equals("Player")) state = new PickedUp(obj);        
+        if (obj.tag.Equals("Player"))
+        {
+            transform.parent = obj.transform;
+            state = GetComponent<PickedUp>();
+        }
+
     }
 
     private void Update()
     {
+        Debug.Log(state);
         // 止まっている
-        if (rigid.velocity == Vector2.zero) state = new Stopped();
+        if (rigid.velocity == Vector2.zero) state = GetComponent<Stopped>();
     }
 }
