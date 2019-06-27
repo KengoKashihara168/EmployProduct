@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private new SpriteRenderer renderer;
-    [SerializeField] private new Light light;
+    [SerializeField] private SpriteRenderer renderer;
+    [SerializeField] private Light light;
     private PlayerMove move;
     private Life life;
     private float contactTime;

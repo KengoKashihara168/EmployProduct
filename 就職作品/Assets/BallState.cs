@@ -23,7 +23,7 @@ public class BallState : MonoBehaviour
         state = GetComponent<Moved>();
     }
 
-    protected virtual void OnCollision(GameObject obj) {}
+    protected virtual void OnCollision(GameObject obj) { }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
