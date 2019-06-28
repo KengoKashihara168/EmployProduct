@@ -4,48 +4,50 @@ using UnityEngine;
 
 
 // ボールの状態を表す基底クラス
-public class BallState : MonoBehaviour
-{
-    [SerializeField] protected PlayerMove player;
+public abstract class BallState : MonoBehaviour
+{                                                                    
     protected BallState state;
     protected Rigidbody2D rigid;
     protected new CircleCollider2D collider;
 
-    private void Awake()
+    private void Start()
     {
-        state = GetComponent<BallState>();
+        //state = GetComponent<Moved>();
         rigid = GetComponent<Rigidbody2D>();
         collider = GetComponent<CircleCollider2D>();
     }
 
-    private void Start()
-    {
-        state = GetComponent<Moved>();
-    }
+    public abstract void Execute();
 
-    protected virtual void OnCollision(GameObject obj) { }
+    public abstract void HitObject(GameObject obj);
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    protected void ConfigureRigidbody(RigidbodyType2D rigidType, float mass, bool colliderEnable)
     {
-        OnCollision(collision.gameObject);
+        rigid.bodyType = rigidType;
+        rigid.mass = mass;
+        collider.enabled = colliderEnable;
     }
 }
 
 // 止まった
 public class Stopped : BallState
 {
-    protected override void OnCollision(GameObject obj)
+    private Moved moved;
+
+    public override void Execute()
+    {
+        // 動いている
+        if (rigid.velocity != Vector2.zero) state = state = GetComponent<Moved>();
+    }
+
+    public override void HitObject(GameObject obj)
     {
         if(obj.tag.Equals("Player"))
         {
             // 拾われた
-            state = GetComponent<Stopped>();
-            return;
+            state = GetComponent<PickedUp>();
         }
-
-        // 動いている
-        state = GetComponent<Moved>();
-    }
+    }    
 }
 
 // 拾われた
@@ -63,50 +65,51 @@ public class PickedUp : BallState
 
     private void Start()
     {
-        rigid.bodyType = RigidbodyType2D.Kinematic;
-        rigid.mass = 0.0f;
-        collider.enabled = false;
+        ConfigureRigidbody(RigidbodyType2D.Kinematic, 0.0f, false);
         transform.localPosition = new Vector3(0.0f, 0.5f, 0.0f);
     }
 
-    private void Update()
+    public override void Execute()
     {
         if (Input.GetKeyDown(KeyCode.Space)) state = GetComponent<Thrown>();
     }
 
-    //protected void SetParent(GameObject parent)
-    //{
-    //    Debug.Assert(parent.tag.Equals("Player"));
-    //    transform.parent = parent.transform;
-    //}
-
-
+    public override void HitObject(GameObject obj)
+    {
+        // 何もしない
+    }
 }
 
 // 投げられた
 public class Thrown : BallState
 {
     private const float DEFAULT_MASS = 1.0f;
+    private PlayerMove player;
 
     private void Start()
     {
         transform.parent = null;
-        rigid.bodyType = RigidbodyType2D.Dynamic;
-        rigid.mass = DEFAULT_MASS;
-        collider.enabled = true;
+        ConfigureRigidbody(RigidbodyType2D.Dynamic, DEFAULT_MASS, true);
+        Throw();
+    }
 
+    public override void Execute()
+    {
+        // 何もしない
+    }
+
+    private void Throw()
+    {
         float angle = (float)player.GetDirection();
         Vector2 force = new Vector2(angle * 200.0f, 0.0f);
         rigid.AddForce(force);
     }
 
-    protected override void OnCollision(GameObject obj)
+    public override void HitObject(GameObject obj)
     {
-        if (obj.tag.Equals("Player")) return;
-
-        if(obj.tag.Equals("Enemy"))
+        if (obj.tag.Equals("Player"))
         {
-            // 敵にダメージを与える
+            player = obj.GetComponent<PlayerMove>();
         }
 
         state = GetComponent<Moved>();
@@ -117,7 +120,7 @@ public class Thrown : BallState
 // 動いた
 public class Moved : BallState
 {
-    protected override void OnCollision(GameObject obj)
+    public override void HitObject(GameObject obj)
     {
         // 拾われた
         if (obj.tag.Equals("Player"))
@@ -128,9 +131,8 @@ public class Moved : BallState
 
     }
 
-    private void Update()
+    public override void Execute()
     {
-        Debug.Log(state);
         // 止まっている
         if (rigid.velocity == Vector2.zero) state = GetComponent<Stopped>();
     }

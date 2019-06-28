@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="Assets\BallController.cs" />
     <Compile Include="Assets\BallState.cs" />
+    <Compile Include="Assets\Enemy.cs" />
     <Compile Include="Assets\GameController.cs" />
     <Compile Include="Assets\GoalController.cs" />
     <Compile Include="Assets\ItemController.cs" />

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BallController : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -14,5 +14,14 @@ public class BallController : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag.Equals("Ball"))
+        {
+            // ダメージを受ける
+
+        }
     }
 }

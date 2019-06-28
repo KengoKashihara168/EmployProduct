@@ -20407,6 +20407,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1396005926}
+  state: {fileID: 0}
+  rigid: {fileID: 0}
+  collider: {fileID: 0}
 --- !u!1 &1190992843
 GameObject:
   m_ObjectHideFlags: 0
@@ -20744,6 +20747,7 @@ GameObject:
   - component: {fileID: 1597083891}
   - component: {fileID: 1597083890}
   - component: {fileID: 1597083892}
+  - component: {fileID: 1597083893}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -20839,6 +20843,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.64, y: 0.64}
   m_EdgeRadius: 0
+--- !u!114 &1597083893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1597083889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a1751dced6628048a1a12f1f5f82c15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1597979195
 GameObject:
   m_ObjectHideFlags: 3
