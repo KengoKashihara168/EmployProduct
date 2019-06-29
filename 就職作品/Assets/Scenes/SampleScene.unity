@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0, g: 0, b: 0, a: 1}
+  m_AmbientSkyColor: {r: 1, g: 1, b: 1, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
@@ -837,49 +837,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &778975756
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 778975758}
-  - component: {fileID: 778975757}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &778975757
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 778975756}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2a167f7fa1019a4e877ea5d7e5ce5cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &778975758
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 778975756}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.8226182, y: -1.7351543, z: -28.099215}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &902594111
 GameObject:
@@ -20287,7 +20244,7 @@ GameObject:
   - component: {fileID: 980160577}
   - component: {fileID: 980160580}
   - component: {fileID: 980160579}
-  - component: {fileID: 980160582}
+  - component: {fileID: 980160581}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Ball
@@ -20389,12 +20346,12 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 784d7758a143706458c5fbf844ebb05a, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!114 &980160582
+  m_Constraints: 4
+--- !u!114 &980160581
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -20403,13 +20360,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 980160576}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5dc4c19e25bf12c4193c9e9bd273ce53, type: 3}
+  m_Script: {fileID: 11500000, guid: b6ef7f96a6da5954cb575366b1e4e733, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1396005926}
-  state: {fileID: 0}
-  rigid: {fileID: 0}
-  collider: {fileID: 0}
+  rigid: {fileID: 980160580}
+  player: {fileID: 1396005921}
 --- !u!1 &1190992843
 GameObject:
   m_ObjectHideFlags: 0

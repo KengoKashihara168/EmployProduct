@@ -33,6 +33,7 @@ public abstract class BallState : MonoBehaviour
 public class Stopped : BallState
 {
     private Moved moved;
+    private PickedUp pickedUp;
 
     public override void Execute()
     {
