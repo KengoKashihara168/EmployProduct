@@ -20364,7 +20364,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rigid: {fileID: 980160580}
-  player: {fileID: 1396005921}
 --- !u!1 &1190992843
 GameObject:
   m_ObjectHideFlags: 0
@@ -20472,6 +20471,7 @@ GameObject:
   - component: {fileID: 1396005926}
   - component: {fileID: 1396005929}
   - component: {fileID: 1396005927}
+  - component: {fileID: 1396005930}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -20646,8 +20646,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b504cfeb63c2df345a8b47a9541d49a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  renderer: {fileID: 1396005922}
-  light: {fileID: 1190992844}
+  spriteRenderer: {fileID: 0}
+--- !u!114 &1396005930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1396005921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48fbbc8aec635f2469e5690f0c713b69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  myLight: {fileID: 1190992844}
 --- !u!1 &1446329318
 GameObject:
   m_ObjectHideFlags: 0
@@ -20703,6 +20715,7 @@ GameObject:
   - component: {fileID: 1597083890}
   - component: {fileID: 1597083892}
   - component: {fileID: 1597083893}
+  - component: {fileID: 1597083894}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -20810,6 +20823,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a1751dced6628048a1a12f1f5f82c15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1597083894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1597083889}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b32978995b1c684ba2ed4f3c2864771, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  life: 1
 --- !u!1 &1597979195
 GameObject:
   m_ObjectHideFlags: 3

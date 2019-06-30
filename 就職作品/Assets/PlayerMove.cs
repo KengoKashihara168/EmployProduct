@@ -18,6 +18,8 @@ public class PlayerMove : MonoBehaviour
     private bool                     isJump;    // ジャンプ中のフラグ
     private Direction                direction; // 向き
 
+    public const int KnockBackTime = 10;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -111,7 +113,7 @@ public class PlayerMove : MonoBehaviour
     /// </summary>
     private IEnumerator KnockBack(Vector3 force)
     {
-        for(int i = 0;i < PlayerController.KNOCK_BACK_TIME; i++)
+        for(int i = 0;i < KnockBackTime; i++)
         {
             rigid.AddForce(force);
             yield return null;
@@ -124,8 +126,8 @@ public class PlayerMove : MonoBehaviour
         isJump = false; // 着地した
     }
 
-    public Direction GetDirection()
+    public float GetDirection()
     {
-        return direction;
+        return (float)direction;
     }
 }

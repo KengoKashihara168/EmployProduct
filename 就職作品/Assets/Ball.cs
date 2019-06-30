@@ -5,7 +5,8 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rigid;
-    [SerializeField] private GameObject player;
+    private bool isThrown;
+    private const float ThrownForce = 400.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -16,13 +17,20 @@ public class Ball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            rigid.isKinematic = false;
-            Vector2 force = new Vector2(400.0f, 0.0f);
-            force *= (float)player.GetComponent<PlayerMove>().GetDirection();
-            rigid.AddForce(force);
-        }
+
+    }
+
+    public void Thrown(float direction)
+    {
+        isThrown = true;
+        rigid.isKinematic = false;
+        Vector2 force = new Vector2(ThrownForce * direction, 0.0f);
+        rigid.AddForce(force);
+    }
+
+    public bool IsThrown()
+    {
+        return isThrown;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -33,6 +41,11 @@ public class Ball : MonoBehaviour
             rigid.velocity = Vector2.zero;
             transform.SetParent(collision.transform);
             transform.localPosition = new Vector3(0.0f, 0.55f, 0.0f);
+        }
+
+        if(!collision.gameObject.tag.Equals("Enemy"))
+        {
+            isThrown = false;
         }
     }
 }

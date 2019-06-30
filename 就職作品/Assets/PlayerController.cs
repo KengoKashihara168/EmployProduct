@@ -4,20 +4,19 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer renderer;
-    [SerializeField] private Light light;
+    [SerializeField] private SpriteRenderer spriteRenderer;
     private PlayerMove move;
     private Life life;
+    private LightController myLight;
     private float contactTime;
-
-    public const int KNOCK_BACK_TIME = 10;
-    private const float DEFOULT_LIGHT_INTENSITY = 10.0f;
+    private int ballIndex;
 
     // Start is called before the first frame update
     void Start()
     {
         move = GetComponent<PlayerMove>();
         life = GetComponent<Life>();
+        myLight = GetComponent<LightController>();
         contactTime = 0.0f;
     }
 
@@ -28,46 +27,86 @@ public class PlayerController : MonoBehaviour
         {
             //Debug.Log("GameOver");
         }
+
+        // スペースキーが押されたら
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            // ボールを投げる
+            Throw();
+        }
     }
 
     /// <summary>
-    /// ライトエネルギー取得
+    /// ボールを投げる
     /// </summary>
-    private void LightPowerUp()
+    private void Throw()
     {
-        // ライトが照らす範囲を広げて少し離す
-        light.range += 2;        
-        light.transform.position += new Vector3(0.0f, 0.0f, -0.5f);
+        if (!CanThrow()) return;
+        Ball ball = transform.GetChild(ballIndex).GetComponent<Ball>();
+        ball.Thrown(move.GetDirection());
     }
 
-    private void ChangeLightIntensity(float intensity)
-    {
-        light.intensity = intensity;
-    }
-
+    /// <summary>
+    /// 点滅
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator Blink()
     {
-        renderer.material.color = ChangeAlpha(0.0f);
-        ChangeLightIntensity(1.0f);
+        // プレイヤーを透明にしてライトの光量を下げる
+        spriteRenderer.material.color = ChangeAlpha(0.0f);
+        myLight.ChangeIntensity(1.0f);
 
+        // コルーチンで0.2秒待つ
         float invisibleTime = 0.2f;
-        yield return new WaitForSeconds(invisibleTime);        
+        yield return new WaitForSeconds(invisibleTime);
 
-        renderer.material.color = ChangeAlpha(1.0f);
-        ChangeLightIntensity(DEFOULT_LIGHT_INTENSITY);
+        // プレイヤーを元に戻す
+        spriteRenderer.material.color = ChangeAlpha(1.0f);
+        myLight.RestoreIntensity();
     }
 
+    /// <summary>
+    /// 透明度だけを変更
+    /// </summary>
+    /// <param name="alpha">変更する透明度</param>
+    /// <returns>変更を適応したColor</returns>
     Color ChangeAlpha(float alpha)
     {
-        Color color = renderer.material.color;
+        // 元々の色情報
+        Color color = spriteRenderer.material.color;
+        // 透明度だけ変更する
         color.a = alpha;
         return color;
     }
 
-    private bool CheckFrameTime()
+    /// <summary>
+    /// 衝突したときの時間が同じか？
+    /// </summary>
+    /// <returns>true:同じ時間/false:時間が違う</returns>
+    private bool IsSameTime()
     {
         if (contactTime == Time.time) return true;
+        // 現在の時間を新たに衝突した時間とする
         contactTime = Time.time;
+        return false;
+    }
+
+    /// <summary>
+    /// 投げられる？
+    /// </summary>
+    /// <returns>true:投げられる/false:投げられない</returns>
+    private bool CanThrow()
+    {
+        // 子オブジェクトのタグを一つずつ比較
+        for(int i = 0;i < transform.childCount;i++)
+        {
+            if(transform.GetChild(i).tag.Equals("Ball"))
+            {
+                // "Ball"があればインデックスを保存
+                ballIndex = i;
+                return true;
+            }
+        }
         return false;
     }
 
@@ -78,13 +117,13 @@ public class PlayerController : MonoBehaviour
     void OnTriggerEnter2D(Collider2D trigger)
     {
         // フレーム時間のチェック
-        if (CheckFrameTime()) return;
+        if (IsSameTime()) return;
 
         // 着地
         if (trigger.tag.Equals("Ground")) move.Landing();
 
         // ライトエネルギー
-        if (trigger.tag.Equals("Light")) LightPowerUp();
+        if (trigger.tag.Equals("Light")) myLight.PowerUp();
 
         // ライフエネルギー
         if (trigger.tag.Equals("Heal")) life.Increase();
@@ -100,7 +139,7 @@ public class PlayerController : MonoBehaviour
         string collisionTag = collision.gameObject.tag;
 
         // フレーム時間のチェック
-        if (CheckFrameTime()) return;
+        if (IsSameTime()) return;
 
         // 敵
         if (collisionTag.Equals("Enemy"))
