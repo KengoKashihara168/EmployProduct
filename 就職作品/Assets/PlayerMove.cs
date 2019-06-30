@@ -12,13 +12,13 @@ public enum Direction
 public class PlayerMove : MonoBehaviour
 {
     Rigidbody2D                      rigid;     // Rigidbody2D
-    [SerializeField] private float   speed;     // 移動速度
-    [SerializeField] private float   jumpForce; // ジャンプ力
     private bool                     moveFlag;  // 移動可能フラグ
     private bool                     isJump;    // ジャンプ中のフラグ
     private Direction                direction; // 向き
 
-    public const int KnockBackTime = 10;
+    private const float Speed = 5.0f;     // 移動速度
+    private const float JumpForce = 7.0f; // ジャンプ力
+    private const int KnockBackTime = 10; // ノックバックの時間
 
     // Start is called before the first frame update
     void Start()
@@ -69,7 +69,7 @@ public class PlayerMove : MonoBehaviour
         // 「←」か「A」が押されたら"-1"「→」か「D」が押されたら"1"になる
         float moveX = Input.GetAxis("Horizontal");
         // 移動速度をかける
-        moveX *= speed;
+        moveX *= Speed;
         Vector2 move = new Vector2(moveX, rigid.velocity.y);
 
         // もしジャンプ中なら横移動速度を半減する
@@ -88,7 +88,7 @@ public class PlayerMove : MonoBehaviour
     {
         // もしすでにジャンプしていたら処理しない
         if (isJump) return rigid.velocity;
-        Vector2 jump = new Vector2(rigid.velocity.x, jumpForce);
+        Vector2 jump = new Vector2(rigid.velocity.x, JumpForce);
         // ジャンプした
         isJump = true;
         return jump;

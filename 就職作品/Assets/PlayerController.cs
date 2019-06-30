@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer spriteRenderer;
+    private AlphaController alpha;
     private PlayerMove move;
     private Life life;
     private LightController myLight;
@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        alpha = GetComponent<AlphaController>();
         move = GetComponent<PlayerMove>();
         life = GetComponent<Life>();
         myLight = GetComponent<LightController>();
@@ -53,7 +54,7 @@ public class PlayerController : MonoBehaviour
     private IEnumerator Blink()
     {
         // プレイヤーを透明にしてライトの光量を下げる
-        spriteRenderer.material.color = ChangeAlpha(0.0f);
+        alpha.ChangeAlpha(0.0f);
         myLight.ChangeIntensity(1.0f);
 
         // コルーチンで0.2秒待つ
@@ -61,22 +62,8 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(invisibleTime);
 
         // プレイヤーを元に戻す
-        spriteRenderer.material.color = ChangeAlpha(1.0f);
+        alpha.ChangeAlpha(1.0f);
         myLight.RestoreIntensity();
-    }
-
-    /// <summary>
-    /// 透明度だけを変更
-    /// </summary>
-    /// <param name="alpha">変更する透明度</param>
-    /// <returns>変更を適応したColor</returns>
-    Color ChangeAlpha(float alpha)
-    {
-        // 元々の色情報
-        Color color = spriteRenderer.material.color;
-        // 透明度だけ変更する
-        color.a = alpha;
-        return color;
     }
 
     /// <summary>

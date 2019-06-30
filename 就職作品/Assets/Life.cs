@@ -5,6 +5,7 @@ using UnityEngine;
 public class Life : MonoBehaviour
 {
     [SerializeField] private int life;
+    public readonly int DieLayer = 10;
 
     // Start is called before the first frame update
     void Start()
