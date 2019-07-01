@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class Fall : MonoBehaviour
 {
-    [SerializeField] private Animator anime;
-    private Rigidbody2D rigid;
-    private AlphaController alpha;
-    private readonly float DefaultGravity = 4.0f;
+    private Rigidbody2D     rigid;                 // リジッドボディ
+    private AlphaController alpha;                 // 透明度
+    private readonly float  DefaultGravity = 4.0f; // 落下するときの重力
 
     // Start is called before the first frame update
     void Start()
@@ -22,20 +21,40 @@ public class Fall : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// 落下
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator Falling()
     {
-        alpha.ChangeAlpha(0.0f);
-        transform.GetChild(0).gameObject.SetActive(true);
+        // 揺れてる子オブジェクトに切り替える
+        ChangeObject(0.0f, true);
         yield return new WaitForSeconds(1.0f);
-        alpha.ChangeAlpha(1.0f);
-        transform.GetChild(0).gameObject.SetActive(false);
+        // 元に戻して落下させる
+        ChangeObject(1.0f, false);
         rigid.gravityScale = DefaultGravity;
     }
 
+    /// <summary>
+    /// 親オブジェクトと子オブジェクトの切替
+    /// </summary>
+    /// <param name="alpha">親オブジェクトの透明度</param>
+    /// <param name="active">子オブジェクトのアクティブ</param>
+    private void ChangeObject(float alpha,bool active)
+    {
+        this.alpha.ChangeAlpha(alpha);
+        transform.GetChild(0).gameObject.SetActive(active);
+    }
+
+    /// <summary>
+    /// 衝突判定
+    /// </summary>
+    /// <param name="trigger"></param>
     private void OnTriggerEnter2D(Collider2D trigger)
     {
         if(trigger.tag.Equals("Player"))
         {
+            // 落下処理
             StartCoroutine(Falling());
         }
     }

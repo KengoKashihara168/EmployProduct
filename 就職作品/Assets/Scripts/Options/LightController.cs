@@ -27,6 +27,9 @@ public class LightController : MonoBehaviour
         myLight.intensity = intensity;
     }
 
+    /// <summary>
+    /// 光量を初期化
+    /// </summary>
     public void RestoreIntensity()
     {
         myLight.intensity = DefoultIntensity;

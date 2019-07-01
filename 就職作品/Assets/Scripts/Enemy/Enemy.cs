@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    private Rigidbody2D rigid;
-    private Life life;
-    private AlphaController alpha;
+    private Rigidbody2D     rigid; // リジッドボディ
+    private Life            life;  // ライフ
+    private AlphaController alpha; // 透明度
 
-    readonly int RiseTime = 30;
-    readonly float RiseLength = 0.05f;
+    readonly int   RiseTime   = 30;    // 撃破されたときの上昇時間(フレーム数)
+    readonly float RiseLength = 0.05f; // 撃破されたときの上昇距離
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +25,10 @@ public class Enemy : MonoBehaviour
         
     }
 
+    /// <summary>
+    /// 撃破
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator Die()
     {
         // レイヤーを「Die」に変える
