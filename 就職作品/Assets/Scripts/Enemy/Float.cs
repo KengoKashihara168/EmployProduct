@@ -42,22 +42,9 @@ public class Float : MonoBehaviour
     /// <returns></returns>
     private float SineWave()
     {
-        float sin = Unsign(Mathf.Sin(angle * Mathf.Deg2Rad));
+        float sin = Mathf.Sin(angle * Mathf.Deg2Rad);
+        sin = Mathf.Abs((sin));
         angle += 180.0f / waveInterval;
         return sin;
-    }
-
-    /// <summary>
-    /// 負数を正数にする
-    /// </summary>
-    /// <param name="f">値</param>
-    /// <returns>正数にした値</returns>
-    private float Unsign(float f)
-    {
-        if(f < 0.0f)
-        {
-            f *= -1.0f;
-        }
-        return f;
     }
 }

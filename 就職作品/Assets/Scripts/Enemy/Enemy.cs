@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    private Rigidbody2D rigid;
     private Life life;
     private AlphaController alpha;
 
@@ -13,6 +14,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        rigid = GetComponent<Rigidbody2D>();
         life = GetComponent<Life>();
         alpha = GetComponent<AlphaController>();
     }
@@ -44,6 +46,7 @@ public class Enemy : MonoBehaviour
     /// </summary>
     private void Rise()
     {
+        rigid.bodyType = RigidbodyType2D.Kinematic;
         // 現在の座標から0.05ずつ上昇
         Vector2 risePosition = transform.position;
         risePosition.y += RiseLength;
