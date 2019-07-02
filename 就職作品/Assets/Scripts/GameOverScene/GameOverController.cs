@@ -13,6 +13,9 @@ public class GameOverController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetMouseButtonDown(0))
+        {
+            SceneController.Instance.ChangeScene("GameScene", 1.0f);
+        }
     }
 }

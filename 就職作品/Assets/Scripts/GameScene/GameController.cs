@@ -16,6 +16,11 @@ public class GameController : MonoBehaviour
     void Update()
     {
         CheckTime(limitTime - Time.time);
+
+        if(Input.GetMouseButtonDown(0))
+        {
+            SceneController.Instance.ChangeScene("GameOverScene", 1.0f);
+        }
     }
 
     void CheckTime(float time)
