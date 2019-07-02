@@ -1,11 +1,11 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{BEC285DA-F406-DDAD-09A4-711127DCFF70}"
-EndProject
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniRx", "UniRx.csproj", "{F2106320-4561-807E-4F3A-805310732284}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UniRx.Examples", "UniRx.Examples.csproj", "{94599004-2AAD-A7D9-4EDA-E75BCC5AB8DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{BEC285DA-F406-DDAD-09A4-711127DCFF70}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{4CF86E28-F216-1CD0-8A6B-7188FF07D944}"
 EndProject
@@ -15,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BEC285DA-F406-DDAD-09A4-711127DCFF70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BEC285DA-F406-DDAD-09A4-711127DCFF70}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BEC285DA-F406-DDAD-09A4-711127DCFF70}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BEC285DA-F406-DDAD-09A4-711127DCFF70}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F2106320-4561-807E-4F3A-805310732284}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F2106320-4561-807E-4F3A-805310732284}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2106320-4561-807E-4F3A-805310732284}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -27,6 +23,10 @@ Global
 		{94599004-2AAD-A7D9-4EDA-E75BCC5AB8DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94599004-2AAD-A7D9-4EDA-E75BCC5AB8DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94599004-2AAD-A7D9-4EDA-E75BCC5AB8DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEC285DA-F406-DDAD-09A4-711127DCFF70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEC285DA-F406-DDAD-09A4-711127DCFF70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEC285DA-F406-DDAD-09A4-711127DCFF70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEC285DA-F406-DDAD-09A4-711127DCFF70}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4CF86E28-F216-1CD0-8A6B-7188FF07D944}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4CF86E28-F216-1CD0-8A6B-7188FF07D944}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4CF86E28-F216-1CD0-8A6B-7188FF07D944}.Release|Any CPU.ActiveCfg = Release|Any CPU
