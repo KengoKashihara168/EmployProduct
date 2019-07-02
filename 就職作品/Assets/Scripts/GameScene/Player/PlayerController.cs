@@ -23,12 +23,7 @@ public class PlayerController : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        if(life.IsDie())
-        {
-            //Debug.Log("GameOver");
-        }
-
+    {        
         // スペースキーが押されたら
         if(Input.GetKeyDown(KeyCode.Space))
         {
@@ -131,12 +126,24 @@ public class PlayerController : MonoBehaviour
         // 敵
         if (collisionTag.Equals("Enemy"))
         {
-            // ダメージを食らう
-            life.Damage();
-            // 敵に当たった処理
-            move.HitEnemy(collision.transform.position);
-            // 点滅
-            StartCoroutine(Blink());
+            HitEnemy(collision.transform.position);            
+        }
+    }
+
+    private void HitEnemy(Vector2 enemyPos)
+    {
+        // ダメージを食らう
+        life.Damage();
+        // 敵に当たった処理
+        move.HitEnemy(enemyPos);
+        // 点滅
+        StartCoroutine(Blink());
+
+        // ライフが0ならゲームオーバー
+        if (life.IsDie())
+        {
+            move.Freeze();
+            SceneController.Instance.ChangeScene("GameOverScene", 1.0f);
         }
     }
 }

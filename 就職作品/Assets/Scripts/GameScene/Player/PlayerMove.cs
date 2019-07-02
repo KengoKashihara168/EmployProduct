@@ -2,36 +2,40 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
+// プレイヤーの向き
 public enum Direction
 {
-    Left = -1,
-    Right = 1,
+    Left = -1, // 左向き
+    Right = 1, // 右向き
 }
 
 public class PlayerMove : MonoBehaviour
 {
-    Rigidbody2D                      rigid;     // Rigidbody2D
-    private bool                     moveFlag;  // 移動可能フラグ
-    private bool                     isJump;    // ジャンプ中のフラグ
-    private Direction                direction; // 向き
+    private Rigidbody2D    rigid;                  // リジッドボディ
+    private bool           moveFlag;               // 移動可能フラグ
+    private bool           isJump;                 // ジャンプ中のフラグ
+    private Direction      direction;              // 向き
 
-    private const float Speed = 5.0f;     // 移動速度
-    private const float JumpForce = 7.0f; // ジャンプ力
-    private const int KnockBackTime = 10; // ノックバックの時間
+    // 定数
+    private readonly float Speed          = 5.0f;  // 移動速度
+    private readonly float JumpForce      = 7.0f;  // ジャンプ力
+    private readonly float KnockBackForce = 30.0f; // ノックバックする力
+    private readonly int   KnockBackTime  = 10;    // ノックバックの時間
 
     // Start is called before the first frame update
     void Start()
     {
-        rigid = GetComponent<Rigidbody2D>();
-        moveFlag = true;
-        isJump = false;
+        rigid     = GetComponent<Rigidbody2D>();
+        moveFlag  = true;
+        isJump    = false;
         direction = Direction.Left;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!moveFlag) return;
+
         // 移動        
         rigid.velocity = Move();
 
@@ -48,16 +52,9 @@ public class PlayerMove : MonoBehaviour
     /// <param name="direct">移動方向</param>
     private void TurnAround(float movement)
     {
-        if(movement > 0)
-        {
-            // 右向き
-            direction = Direction.Right;
-        }
-        else if(movement < 0)
-        {
-            // 左向き
-            direction = Direction.Left;
-        }
+        if (movement == 0) return;
+        // プラス方向に動いていれば右,マイナス方向に動いていれば左
+        direction = movement > 0 ? Direction.Right : Direction.Left;
     }
 
     /// <summary>
@@ -65,7 +62,6 @@ public class PlayerMove : MonoBehaviour
     /// </summary>
     private Vector2 Move()
     {
-        if (!moveFlag) return Vector2.zero;
         // 「←」か「A」が押されたら"-1"「→」か「D」が押されたら"1"になる
         float moveX = Input.GetAxis("Horizontal");
         // 移動速度をかける
@@ -103,8 +99,7 @@ public class PlayerMove : MonoBehaviour
         // ノックバックする処理
         moveFlag = false;
         Vector2 direction = transform.position - enemyPos;
-        float knockForce = 300.0f;
-        Vector2 force = direction.normalized * knockForce;
+        Vector2 force = direction.normalized * KnockBackForce;
         StartCoroutine(KnockBack(force));
     }
 
@@ -129,5 +124,10 @@ public class PlayerMove : MonoBehaviour
     public float GetDirection()
     {
         return (float)direction;
+    }
+
+    public void Freeze()
+    {
+        moveFlag = false;
     }
 }
