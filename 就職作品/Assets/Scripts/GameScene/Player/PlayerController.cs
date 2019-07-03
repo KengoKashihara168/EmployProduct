@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
         move = GetComponent<PlayerMove>();
         life = GetComponent<Life>();
         myLight = GetComponent<LightController>();
-        contactTime = 0.0f;
+        contactTime = 0.0f;        
     }
 
     // Update is called once per frame
@@ -29,6 +29,13 @@ public class PlayerController : MonoBehaviour
         {
             // ボールを投げる
             Throw();
+        }
+
+        // ライフが0ならゲームオーバー
+        if (life.IsDie())
+        {
+            move.Freeze();
+            SceneController.Instance.ChangeScene("GameOverScene", 1.0f);
         }
     }
 
@@ -137,13 +144,6 @@ public class PlayerController : MonoBehaviour
         // 敵に当たった処理
         move.HitEnemy(enemyPos);
         // 点滅
-        StartCoroutine(Blink());
-
-        // ライフが0ならゲームオーバー
-        if (life.IsDie())
-        {
-            move.Freeze();
-            SceneController.Instance.ChangeScene("GameOverScene", 1.0f);
-        }
+        StartCoroutine(Blink());        
     }
 }
