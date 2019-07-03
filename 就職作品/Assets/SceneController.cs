@@ -20,6 +20,9 @@ public class SceneController : MonoBehaviour
             {
                 GameObject obj = new GameObject("SceneController");
                 instance = obj.AddComponent<SceneController>();
+
+                Instantiate(obj);
+                obj.AddComponent<FadeManager>();
             }
             return instance;
         }
@@ -35,15 +38,12 @@ public class SceneController : MonoBehaviour
     public void ChangeScene(string sceneName, float fadeTime = 0.0f)
     {
         this.UpdateAsObservable()
-            .Take(1)                                                              // 1回だけ実行
-            .Subscribe(x => Execute(sceneName,fadeTime)); // シーン遷移
+            .First()                                      // 1回だけ実行
+            .Subscribe(l => Execute(sceneName,fadeTime)); // シーン遷移
     }
 
     public void Execute(string sceneName, float fadeTime = 0.0f)
-    {
-        GameObject obj = new GameObject();
-        Instantiate(obj);
-        obj.AddComponent<FadeManager>();
+    {        
         FadeManager.Instance.LoadScene(sceneName, fadeTime);
     }
 }

@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     {
         if(life.IsDie())
         {
-            //Debug.Log("GameOver");
+            SceneController.Instance.ChangeScene("GameOverScene", 1.0f);
         }
 
         // スペースキーが押されたら
