@@ -7,18 +7,6 @@ public class Life : MonoBehaviour
     [SerializeField] private int life;
     public readonly int DieLayer = 10;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void Damage()
     {
         life--;
@@ -27,6 +15,11 @@ public class Life : MonoBehaviour
     public void Increase()
     {
         life++;
+    }
+
+    public int GetLifeCount()
+    {
+        return life;
     }
 
     public bool IsDie()

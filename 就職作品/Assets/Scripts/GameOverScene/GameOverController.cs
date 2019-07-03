@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameOverController : MonoBehaviour
 {
+    private readonly float SceneCangeSecond = 3.0f; // シーン遷移開始までの時間
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,9 +15,10 @@ public class GameOverController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
+        if(Mathf.Approximately(SceneCangeSecond - Time.time,0.0f))
         {
-            SceneController.Instance.ChangeScene("GameScene", 1.0f);
+            Debug.Log("シーン遷移");
+            //SceneController.Instance.ChangeScene("GameScene", 1.0f);
         }
     }
 }
