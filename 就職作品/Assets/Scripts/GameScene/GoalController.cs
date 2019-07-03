@@ -8,7 +8,7 @@ public class GoalController : MonoBehaviour
     {
         if(trigger.tag.Equals("Player"))
         {
-            Debug.Log("Goal");
+            SceneController.Instance.ChangeScene("TitleScene", 1.0f);
         }
     }
 }
