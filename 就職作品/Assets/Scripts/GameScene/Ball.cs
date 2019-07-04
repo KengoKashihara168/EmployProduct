@@ -1,10 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Ball : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rigid;
+
+    [SerializeField] private TilemapCollider2D tilemap;
+
     private bool isThrown;
     private const float ThrownForce = 400.0f;
 
@@ -24,8 +28,11 @@ public class Ball : MonoBehaviour
     {
         isThrown = true;
         rigid.isKinematic = false;
+        transform.parent = null;
         Vector2 force = new Vector2(ThrownForce * direction, 0.0f);
         rigid.AddForce(force);
+
+
     }
 
     public bool IsThrown()
@@ -46,6 +53,14 @@ public class Ball : MonoBehaviour
         if(!collision.gameObject.tag.Equals("Enemy"))
         {
             isThrown = false;
+        }
+
+        if (collision.gameObject.tag.Equals("Ground"))
+        {
+            CircleCollider2D circle = GetComponent<CircleCollider2D>();
+
+            //Debug.Log(circle.ClosestPoint(collision.transform.position));
+            //Debug.Log(transform.position);
         }
     }
 }
